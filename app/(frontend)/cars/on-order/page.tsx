@@ -6,7 +6,7 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
 	title: 'Автомобили под заказ',
-	description: 'Закажите автомобиль мечты из Китая. Доставка и оформление — всё включено.',
+	description: 'Закажите автомобиль из Китая. Доставка и оформление — всё включено.',
 }
 
 export default async function OnOrderPage() {
