@@ -18,13 +18,13 @@ export function Hero() {
 					</div>
 
 					<h1 className="text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
-						Премиальные <br />
-						<span className="text-amber-400">автомобили</span> <br />
-						от лидеров рынка
+						автомобили <br />
+						<span className="text-amber-400">от лидеров рынка</span> <br />
+						Из Китая
 					</h1>
 
 					<p className="mt-6 max-w-xl text-lg text-neutral-400 leading-relaxed md:text-xl">
-						Новые автомобили из Китая и Европы с полным сопровождением.
+						Новые автомобили из Китая с полным сопровождением.
 					</p>
 
 					<div className="mt-10 flex flex-col gap-4 sm:flex-row">
