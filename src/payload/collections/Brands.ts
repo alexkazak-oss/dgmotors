@@ -1,6 +1,6 @@
 import type {CollectionConfig} from 'payload'
 import {isAdminOrPublished} from '../access'
-import {publishedField, seoFields, slugField} from '../fields'
+import {autoPublishedField, seoFields, slugField} from '../fields'
 
 export const Brands: CollectionConfig = {
 	slug: 'brands',
@@ -18,6 +18,8 @@ export const Brands: CollectionConfig = {
 			label: 'Название',
 			type: 'text',
 			required: true,
+			minLength: 1,
+			maxLength: 80,
 		},
 		slugField,
 		{
@@ -48,7 +50,7 @@ export const Brands: CollectionConfig = {
 			defaultValue: 0,
 			admin: {position: 'sidebar'},
 		},
-		publishedField,
+		autoPublishedField,
 		...seoFields,
 	],
 }

@@ -1,6 +1,6 @@
 import type {CollectionConfig} from 'payload'
 import {isAdminOrPublished} from '../access'
-import {publishedField, seoFields, slugField} from '../fields'
+import {createSlugField, publishedField, seoFields} from '../fields'
 
 export const Cars: CollectionConfig = {
 	slug: 'cars',
@@ -25,8 +25,16 @@ export const Cars: CollectionConfig = {
 			label: 'Название',
 			type: 'text',
 			required: true,
+			minLength: 2,
+			maxLength: 150,
 		},
-		slugField,
+		createSlugField({
+			sources: [
+				{field: 'brand', relationTo: 'brands', relationField: 'title'},
+				{field: 'model', relationTo: 'models', relationField: 'title'},
+				{field: 'specifications.year'},
+			],
+		}),
 		{
 			name: 'brand',
 			label: 'Бренд',
@@ -79,7 +87,15 @@ export const Cars: CollectionConfig = {
 			name: 'vin',
 			label: 'VIN',
 			type: 'text',
+			maxLength: 17,
 			admin: {position: 'sidebar'},
+			validate: (value: string | null | undefined) => {
+				if (!value) return true // optional
+				if (!/^[A-HJ-NPR-Z0-9]{17}$/i.test(value)) {
+					return 'VIN должен содержать ровно 17 символов (без I, O, Q)'
+				}
+				return true
+			},
 		},
 		{
 			name: 'stockNumber',
@@ -93,7 +109,7 @@ export const Cars: CollectionConfig = {
 			label: 'Характеристики',
 			type: 'group',
 			fields: [
-				{name: 'year', type: 'number', label: 'Год'},
+				{name: 'year', type: 'number', label: 'Год', min: 1990, max: 2030},
 				{name: 'mileage', type: 'number', min: 0, label: 'Пробег (км)'},
 				{
 					name: 'engineType',

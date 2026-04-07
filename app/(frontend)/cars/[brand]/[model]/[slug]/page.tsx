@@ -20,8 +20,8 @@ import {
 	Zap,
 } from 'lucide-react'
 import type { Metadata } from 'next'
-import Image from 'next/image'
 import { notFound } from 'next/navigation'
+import { CarGallery } from './CarGallery'
 import { CarLeadSection } from './CarLeadSection'
 
 interface Props {
@@ -151,36 +151,9 @@ export default async function CarPage({ params }: Props) {
 					<div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
 						{/* Left: Gallery + Details */}
 						<div className="lg:col-span-2 space-y-8">
-							{/* Main image */}
+							{/* Gallery */}
 							{allImages.length > 0 && (
-								<div className="space-y-3">
-									<div className="relative aspect-16/10 overflow-hidden rounded-2xl bg-neutral-800">
-										<Image
-											src={allImages[0].url}
-											alt={allImages[0].alt || car.title}
-											fill
-											className="object-cover"
-											priority
-											sizes="(max-width: 1024px) 100vw, 66vw"
-										/>
-									</div>
-									{/* Thumbnails */}
-									{allImages.length > 1 && (
-										<div className="grid grid-cols-4 gap-2 sm:grid-cols-6">
-											{allImages.slice(1, 7).map((img, i) => (
-												<div key={i} className="relative aspect-4/3 overflow-hidden rounded-lg bg-neutral-800">
-													<Image
-														src={img.url}
-														alt={img.alt || `${car.title} фото ${i + 2}`}
-														fill
-														className="object-cover"
-														sizes="150px"
-													/>
-												</div>
-											))}
-										</div>
-									)}
-								</div>
+								<CarGallery images={allImages} title={car.title} />
 							)}
 
 							{/* Title + status (mobile) */}

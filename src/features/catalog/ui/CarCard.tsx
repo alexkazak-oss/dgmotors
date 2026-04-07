@@ -26,6 +26,8 @@ interface CarCardProps {
 		tags?: string[] | null
 		isFeatured?: boolean
 	}
+	/** Mark as high-priority (above the fold) — disables lazy loading */
+	priority?: boolean
 }
 
 const statusVariant: Record<string, 'success' | 'warning' | 'danger' | 'info'> = {
@@ -35,7 +37,7 @@ const statusVariant: Record<string, 'success' | 'warning' | 'danger' | 'info'> =
 	reserved: 'warning',
 }
 
-export function CarCard({ car }: CarCardProps) {
+export function CarCard({ car, priority = false }: CarCardProps) {
 	const href = `/cars/${car.brand.slug}/${car.model.slug}/${car.slug}`
 	const specs = car.specifications
 
@@ -50,6 +52,8 @@ export function CarCard({ car }: CarCardProps) {
 						fill
 						className="object-cover transition-transform duration-500 group-hover:scale-105"
 						sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+						loading={priority ? 'eager' : 'lazy'}
+						priority={priority}
 					/>
 				) : (
 					<div className="flex h-full w-full items-center justify-center text-neutral-600">
@@ -116,8 +120,8 @@ export function CarCard({ car }: CarCardProps) {
 
 				{/* CTA */}
 				<div className="mt-4 flex gap-2">
-					<Button asChild size="sm" className="flex-1" variant="primary">
-						<Link href={href}>Подробнее</Link>
+					<Button as={Link} href={href} size="sm" className="flex-1" variant="primary">
+						Подробнее
 					</Button>
 					<Button size="sm" variant="secondary" className="flex-1">
 						Оставить заявку

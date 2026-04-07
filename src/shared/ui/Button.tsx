@@ -1,5 +1,6 @@
 import { cn } from '@/src/shared/lib/utils'
 import { cva, type VariantProps } from 'class-variance-authority'
+import { type ComponentPropsWithoutRef, type ElementType } from 'react'
 
 const buttonVariants = cva(
 	'inline-flex items-center justify-center gap-2 rounded-lg font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
@@ -26,21 +27,31 @@ const buttonVariants = cva(
 	},
 )
 
-interface ButtonProps
-	extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-	VariantProps<typeof buttonVariants> {
-	asChild?: boolean
+type ButtonOwnProps<C extends ElementType = 'button'> = VariantProps<typeof buttonVariants> & {
+	as?: C
+	className?: string
 }
 
-export function Button({ className, variant, size, ...props }: ButtonProps) {
+type ButtonProps<C extends ElementType = 'button'> = ButtonOwnProps<C> &
+	Omit<ComponentPropsWithoutRef<C>, keyof ButtonOwnProps<C>>
+
+export function Button<C extends ElementType = 'button'>({
+	as,
+	className,
+	variant,
+	size,
+	...props
+}: ButtonProps<C>) {
+	const Component = as ?? 'button'
 	return (
-		<button className={cn(buttonVariants({ variant, size, className }))} {...props} />
+		<Component className={cn(buttonVariants({ variant, size, className }))} {...props} />
 	)
 }
 
-interface LinkButtonProps
-	extends React.AnchorHTMLAttributes<HTMLAnchorElement>,
-	VariantProps<typeof buttonVariants> { }
+type LinkButtonProps = VariantProps<typeof buttonVariants> &
+	Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, 'className'> & {
+		className?: string
+	}
 
 export function LinkButton({ className, variant, size, ...props }: LinkButtonProps) {
 	return (

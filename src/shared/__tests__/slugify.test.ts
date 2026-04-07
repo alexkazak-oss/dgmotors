@@ -21,4 +21,12 @@ describe('slugify', () => {
 	it('handles mixed cyrillic and latin', () => {
 		expect(slugify('Zeekr 001 Электро')).toBe('zeekr-001-elektro')
 	})
+
+	it('converts spaces to hyphens in manually entered slugs', () => {
+		expect(slugify('xiaomi ui8')).toBe('xiaomi-ui8')
+	})
+
+	it('lowercases uppercase slugs', () => {
+		expect(slugify('Audi-A3')).toBe('audi-a3')
+	})
 })
