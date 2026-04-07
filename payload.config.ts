@@ -72,11 +72,13 @@ export default buildConfig({
 							media: {
 								prefix: 'media',
 								disableLocalStorage: true,
-								generateFileURL: ({filename}) => {
-									const base =
+								generateFileURL: ({filename, prefix}) => {
+									const base = (
 										process.env.S3_PUBLIC_BASE_URL ||
 										`https://${process.env.S3_BUCKET}.s3.${process.env.S3_REGION}.amazonaws.com`
-									return `${base}/media/${filename}`
+									).trim()
+									const dir = (prefix || 'media').trim()
+									return `${base}/${dir}/${filename}`.trim()
 								},
 							},
 						},

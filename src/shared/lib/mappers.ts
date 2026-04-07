@@ -28,7 +28,9 @@ function toMediaImage(media: unknown): MediaImage | null {
 		typeof (media as PayloadDoc).url === 'string'
 	) {
 		const m = media as PayloadDoc
-		return {url: m.url, alt: (m.alt as string) ?? ''}
+		const url = (m.url as string).trim()
+		if (!url) return null
+		return {url, alt: (m.alt as string) ?? ''}
 	}
 	return null
 }

@@ -10,7 +10,8 @@ const nextConfig: NextConfig = {
 		remotePatterns: [
 			{
 				protocol: 'https',
-				hostname: '**',
+				hostname: 'amzn-dgmotors.s3.eu-north-1.amazonaws.com',
+				pathname: '/media/**',
 			},
 		],
 	},
