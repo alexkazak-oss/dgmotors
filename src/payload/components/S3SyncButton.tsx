@@ -16,7 +16,7 @@ type SyncState =
 	| { status: 'success'; result: SyncResult }
 	| { status: 'error'; message: string }
 
-export function S3SyncButton() {
+export default function S3SyncButton() {
 	const [state, setState] = useState<SyncState>({ status: 'idle' })
 
 	const handleSync = useCallback(async () => {
