@@ -4,6 +4,7 @@ import {s3Storage} from '@payloadcms/storage-s3'
 import {ru} from '@payloadcms/translations/languages/ru'
 import path from 'path'
 import {buildConfig} from 'payload'
+import sharp from 'sharp'
 import {fileURLToPath} from 'url'
 
 import {
@@ -64,6 +65,8 @@ export default buildConfig({
 		},
 	}),
 
+	sharp,
+
 	plugins: [
 		...(s3Enabled
 			? [
@@ -72,6 +75,7 @@ export default buildConfig({
 							media: {
 								prefix: 'media',
 								disableLocalStorage: true,
+								disablePayloadAccessControl: true,
 								generateFileURL: ({filename, prefix}) => {
 									const base = (
 										process.env.S3_PUBLIC_BASE_URL ||
