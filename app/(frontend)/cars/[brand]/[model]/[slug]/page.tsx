@@ -173,8 +173,8 @@ export default async function CarPage({ params }: Props) {
 								</div>
 							</div>
 
-							{/* Specifications */}
-							{specItems.length > 0 && (
+								{/* Specifications */}
+								{specItems.length > 0 && (
 								<div>
 									<h2 className="mb-4 text-xl font-semibold text-white">Характеристики</h2>
 									<div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
