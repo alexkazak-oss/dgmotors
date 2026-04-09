@@ -4,6 +4,8 @@ import { getPayload } from '@/src/shared/lib/payload'
 import { Breadcrumbs, Container } from '@/src/shared/ui'
 import type { Metadata } from 'next'
 
+export const revalidate = 60
+
 export const metadata: Metadata = {
 	title: 'Автомобили под заказ',
 	description: 'Закажите автомобиль из Китая. Доставка и оформление — всё включено.',

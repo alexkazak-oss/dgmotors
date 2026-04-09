@@ -11,6 +11,8 @@ import { ShowroomSection } from '@/src/widgets/showroom/ShowroomSection'
 import { TestimonialsSection } from '@/src/widgets/testimonials/TestimonialsSection'
 import { Suspense } from 'react'
 
+export const revalidate = 60
+
 export default function HomePage() {
 	const jsonLd = generateDealerJsonLd()
 

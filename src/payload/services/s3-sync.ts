@@ -48,13 +48,15 @@ const MIME_MAP: Record<string, string> = {
 // Helpers
 // ---------------------------------------------------------------------------
 function getS3Config(): S3Config {
-	const bucket = process.env.S3_BUCKET
-	const region = process.env.S3_REGION
-	const accessKeyId = process.env.S3_ACCESS_KEY_ID
-	const secretAccessKey = process.env.S3_SECRET_ACCESS_KEY
+	const bucket = process.env.S3_BUCKET?.trim()
+	const region = process.env.S3_REGION?.trim()
+	const accessKeyId = process.env.S3_ACCESS_KEY_ID?.trim()
+	const secretAccessKey = process.env.S3_SECRET_ACCESS_KEY?.trim()
 
 	if (!bucket || !region || !accessKeyId || !secretAccessKey) {
-		throw new Error('S3 environment variables are not configured')
+		throw new Error(
+			`S3 environment variables are not configured. bucket=${bucket ? 'set' : 'missing'} region=${region ? 'set' : 'missing'}`,
+		)
 	}
 
 	return {

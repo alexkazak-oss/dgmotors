@@ -5,6 +5,8 @@ import { Breadcrumbs, Container } from '@/src/shared/ui'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
+export const revalidate = 60
+
 interface Props {
 	params: Promise<{ brand: string; model: string }>
 }

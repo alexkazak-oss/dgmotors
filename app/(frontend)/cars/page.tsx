@@ -4,6 +4,8 @@ import { getPayload } from '@/src/shared/lib/payload'
 import { Breadcrumbs, Container } from '@/src/shared/ui'
 import type { Metadata } from 'next'
 
+export const revalidate = 60
+
 export const metadata: Metadata = {
 	title: 'Каталог автомобилей',
 	description: 'Полный каталог автомобилей DG Motors. Новые авто в наличии и под заказ от мировых производителей из Китая.',
